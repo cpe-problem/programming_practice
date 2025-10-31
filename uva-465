@@ -1,0 +1,76 @@
+https://onlinejudge.org/external/4/465.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool overflow(string &s) {
+    string maxInt = "2147483647";
+
+    int i = 0;
+    while (i < s.size() && s[i] == '0') i++;
+    string num = s.substr(i);
+
+    if (num.empty()) return false;
+    if (num.size() < maxInt.size()) return false;
+    if (num.size() > maxInt.size()) return true;
+
+    return num > maxInt;
+}
+
+string add(string &num1,string &num2)
+{
+    string s;
+    int len1 = num1.size(), len2 = num2.size();
+    int carry = 0;
+    int Max = max(len1, len2);
+
+    for (int i = 0; i < Max; i++) {
+        int digitA = (i < len1) ? num1[len1-1-i] - '0' : 0;
+        int digitB = (i < len2) ? num2[len2-1-i] - '0' : 0;
+        int sum = digitA + digitB + carry;
+        carry = sum / 10;
+        s.push_back((sum % 10) + '0');
+    }
+    if (carry) s.push_back(carry + '0');
+    reverse(s.begin(), s.end());
+    return s;
+}
+
+string mul(string &a, string &b)
+{
+    if (a == "0" || b == "0") return "0";
+
+    int n = a.size(), m = b.size();
+    vector<int> result(n + m, 0);  
+
+    
+    for (int i = n - 1; i >= 0; i--) {
+        for (int j = m - 1; j >= 0; j--) {
+            int mul = (a[i] - '0') * (b[j] - '0');
+            int posLow = i + j + 1;   
+            int posHigh = i + j;      
+            mul += result[posLow];
+            result[posLow] = mul % 10;
+            result[posHigh] += mul / 10;
+        }
+    }
+    string product;
+    for (int num : result)
+        if (!(product.empty() && num == 0))
+            product.push_back(num + '0');
+    return product.empty() ? "0" : product;
+}
+
+int main() {
+    string num1, oprator, num2;
+    while (cin >> num1 >> oprator >> num2)
+    {
+        cout << num1 <<" "<< oprator <<" "<< num2 << endl;
+        if (overflow(num1)) cout << "first number too big\n";
+        if (overflow(num2)) cout << "second number too big\n";
+        string result;
+        if(oprator=="+") result = add(num1, num2);
+        else result = mul(num1, num2);
+        if (overflow(result)) cout << "result too big\n";
+    }
+}
