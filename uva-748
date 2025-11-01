@@ -1,4 +1,6 @@
 https://onlinejudge.org/external/7/p748.pdf
+//小數點越界補 0
+//trim 前後 0(去掉多餘 0)
 
 #include <bits/stdc++.h>
 using namespace std;
