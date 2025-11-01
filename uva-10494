@@ -1,0 +1,36 @@
+https://onlinejudge.org/external/104/10494.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+string divide(string &a, string &op, int n)
+{
+    if(a=="0") return "0";
+    long long r=0;
+    string q="";
+    bool flag=false;
+    for(char s:a)
+    {
+        //更新當前被除數
+        int value=s-'0';
+        r=r*10+value;
+        long long cq=r/n; // 商
+        if(cq!=0) flag=true; //避免前導零
+        if(flag) q += to_string(cq);
+        r%=n;//餘數
+    }
+    if(op=="/")
+    {
+        if(q.empty()) return "0";
+        return q;
+    }
+    else return to_string(r);
+}
+
+int main() 
+{
+    string a, op;
+    int n;
+    while(cin >> a >> op >> n)
+        cout << divide(a, op, n) << endl;
+}
