@@ -1,2 +1,74 @@
 //https://onlinejudge.org/external/100/10010.pdf
 
+#include <bits/stdc++.h>
+using namespace std;
+
+int dir[8][2]={
+    {0,1},//右
+    {0,-1},//左
+    {-1,0},//上
+    {1,0},//下
+    {-1, -1},//左上
+    {1,1},//右下
+    {-1,1},//右上
+    {1,-1}};//左下
+
+int main() 
+{
+    int t;
+    cin >> t;
+    bool flag=false;
+    while(t--)
+    {
+        if(flag) cout << endl; 
+        flag=true;
+        int row, column, check;
+        cin >> row >> column;
+        vector<string> s(row);
+        for(int i=0;i<row;i++) cin >> s[i];
+        for(int i=0;i<row;i++)
+            for(int j=0;j<column;j++) s[i][j]=(char)toupper(s[i][j]);
+        cin >> check;
+        string s2;
+        while(check--)
+        {
+            cin >> s2;
+            for(int i=0;i<s2.size();i++) s2[i]=toupper(s2[i]);
+            bool found = false;
+            for(int r = 0; r < row && !found; r++)
+            {
+                for(int c = 0; c < column && !found; c++)
+                {
+                    if(s[r][c] == s2[0]) //第一個字母符合才檢查
+                    {
+                        // 往 8 個方向找
+                        for(int k = 0; k < 8 && !found; k++)
+                        {
+                            int rr = r, cc = c;
+                            bool ok = true;
+
+                            for(int p = 1; p < s2.size(); p++)
+                            {
+                                rr += dir[k][0];
+                                cc += dir[k][1];
+
+                                // 檢查邊界 & 字母是否符合
+                                if(rr < 0 || rr >= row || cc < 0 || cc >= column || s[rr][cc] != s2[p])
+                                {
+                                    ok = false;
+                                    break;
+                                }
+                            }
+                            if(ok) 
+                            {
+                                cout << r+1 << " " << c+1 << "\n";
+                                found = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
