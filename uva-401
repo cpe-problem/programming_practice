@@ -1,0 +1,49 @@
+//https://onlinejudge.org/external/4/401.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    char ch[256];
+    ch['A']='A';
+    ch['E']='3';
+    ch['H']='H';
+    ch['I']='I';
+    ch['J']='L';
+    ch['L']='J';
+    ch['M']='M';
+    ch['O']='O';
+    ch['S']='2';
+    ch['T']='T';
+    ch['U']='U';
+    ch['V']='V';
+    ch['W']='W';
+    ch['X']='X';
+    ch['Y']='Y';
+    ch['Z']='5';
+    ch['1']='1';
+    ch['2']='S';
+    ch['3']='E';
+    ch['5']='Z';
+    ch['8']='8';
+    string s, p, r;
+    while(cin >> s)
+    {
+        p=s;
+        reverse(p.begin(), p.end());
+        int n=s.size();
+        r.resize(n);
+        for(int i=0;i<n;i++) r[i]=ch[s[i]];// 將 s[i] 映射成鏡像字元存入 r
+        reverse(r.begin(), r.end());
+        cout << s << " -- ";
+        if(s==r)
+        {
+            if(s==p) cout << "is a mirrored palindrome.\n";
+            else cout << "is a mirrored string.\n";
+        }
+        else if(s==p) cout << "is a regular palindrome.\n";
+        else cout << "is not a palindrome.\n";
+        cout << endl;
+    }
+}
