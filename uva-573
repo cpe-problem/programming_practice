@@ -1,0 +1,40 @@
+//https://onlinejudge.org/external/5/573.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int H, U, D;
+    double F;
+    while (cin >> H >> U >> D >> F) {
+        if (H == 0) break;
+
+        double height = 0.0;
+        double climb = U;
+        double fatigue = U * F / 100.0;
+        int day = 0;
+
+        while (true) {
+            day++;
+            // 白天爬
+            if (climb > 0)
+                height += climb;
+            if (height > H) {
+                cout << "success on day " << day << endl;
+                break;
+            }
+
+            // 晚上滑
+            height -= D;
+            if (height < 0) {
+                cout << "failure on day " << day << endl;
+                break;
+            }
+
+            // 疲勞遞減
+            climb -= fatigue;
+            if (climb < 0) climb = 0;
+        }
+    }
+    return 0;
+}
