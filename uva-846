@@ -1,0 +1,20 @@
+//https://onlinejudge.org/external/8/846.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int a, b;
+        cin >> a >> b;
+        int d=b-a, k=sqrt(d);
+        if(d<3) cout << d << endl;
+        else if(d==pow(k,2)) cout << 2*k-1 << endl;
+        else if(pow(k, 2) < d && d<= pow(k, 2)+k) cout << 2*k << endl;
+        else if(pow(k, 2)+k < d && d < pow(k+1, 2)) cout << 2*k+1 << endl;
+    }
+}
