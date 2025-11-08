@@ -1,0 +1,46 @@
+//https://onlinejudge.org/external/101/10161.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int a;
+    while(cin >> a, a)
+    {
+        int k=sqrt(a);
+        if(pow(k, 2)!=a) k++;
+        int p=pow(k-1, 2);
+        int d=a-p;
+        int x, y;
+        if(d>k)
+        {
+            if(k%2) 
+            {
+                x=k-(d - k);
+                y = k;
+            }
+            else
+            {
+                y=k-(d - k);
+                x = k;
+            }
+        }
+        else
+        {
+            if(k%2) 
+            {
+                x=k;
+                y=d;
+            }
+            else
+            {
+                y=k;
+                x=d;
+            }
+        }
+        cout << x << " " << y << endl;
+    }
+
+    
+}
