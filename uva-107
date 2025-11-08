@@ -1,2 +1,43 @@
 //https://onlinejudge.org/external/1/107.pdf
 
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    long long a, b;
+    while (cin >> a >> b) {
+        if (a == 0 && b == 0) break;
+
+        long long N = 0;
+        int j = 0;
+
+        // 找出正確的 N 和層數 j
+        for (int k = 1; k < 50; k++) {
+            long long n = round(pow(b, 1.0 / k));
+            if (pow(n, k) == b && pow(n + 1, k) == a) {
+                N = n;
+                j = k;
+                break;
+            }
+        }
+
+        // 計算非工作貓數量
+        long long not_working = 0, cats = 1;
+        for (int i = 0; i < j; i++) {
+            not_working += cats;
+            cats *= N;
+        }
+
+        // 計算總高度
+        long long total_height = 0;
+        long long height = a;
+        cats = 1;
+        for (int i = 0; i <= j; i++) {
+            total_height += cats * height;
+            cats *= N;
+            height /= (N + 1);
+        }
+
+        cout << not_working << " " << total_height << endl;
+    }
+}
