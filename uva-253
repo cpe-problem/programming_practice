@@ -1,0 +1,95 @@
+//https://onlinejudge.org/external/2/253.pdf
+
+#include<bits/stdc++.h>
+
+// 定義兩個字串來儲存立方體的顏色配置
+char str1[6], str2[6];
+
+// 順時針旋轉函數
+void clockwise()
+{
+    int temp = str2[4];
+    str2[4] = str2[2];
+    str2[2] = str2[1];
+    str2[1] = str2[3];
+    str2[3] = temp;
+}
+
+// 向前滾動旋轉函數
+void forward()
+{
+    int temp = str2[5];
+    str2[5] = str2[4];
+    str2[4] = str2[0];
+    str2[0] = str2[1];
+    str2[1] = temp;
+}
+
+// 向右翻轉旋轉函數
+void turnRight()
+{
+    int temp = str2[3];
+    str2[3] = str2[0];
+    str2[0] = str2[2];
+    str2[2] = str2[5];
+    str2[5] = temp;
+}
+
+// 比較兩個字串是否相同
+bool cmp()
+{
+    for (int i = 0; i < 6; i++)
+        if (str1[i] != str2[i])  // 如果某一個顏色配置不相同，返回 false
+            return false;
+    return true;  // 如果所有面都相同，返回 true
+}
+
+int main()
+{
+    // 讀取輸入
+    while ((str1[0] = getchar()) != EOF)  // 讀取第一個字串
+    {
+        int i;
+        for (i = 1; i < 6; i++)  // 讀取str1的其餘字符
+            str1[i] = getchar();
+        for (i = 0; i < 6; i++)  // 讀取第二個字串
+            str2[i] = getchar();
+        getchar();  // 忽略換行符
+
+        bool ok = false;  // 設置一個標誌來記錄是否找到了匹配
+
+        // 嘗試將每個面設為頂面，並對頂面做4次旋轉（順時針）
+        for (int i = 0; i < 4 && !ok; i++)
+        {
+            for (int j = 0; j < 4; j++)  // 每次順時針旋轉4次
+            {
+                if (cmp())  // 如果匹配，設置 ok 為 true
+                {
+                    ok = true;
+                    break;
+                }
+                clockwise();  // 順時針旋轉一次
+            }
+            forward();  // 向前滾動一次
+        }
+
+        // 再次嘗試將每個面設為頂面，並進行旋轉（這次是向右翻轉）
+        for (int i = 0; i < 4 && !ok; i++)
+        {
+            for (int j = 0; j < 4; j++)  // 每次順時針旋轉4次
+            {
+                if (cmp())  // 如果匹配，設置 ok 為 true
+                {
+                    ok = true;
+                    break;
+                }
+                clockwise();  // 順時針旋轉一次
+            }
+
+            turnRight();  // 向右翻轉一次
+        }
+
+        // 輸出結果
+        puts(ok ? "TRUE" : "FALSE");
+    }
+}
