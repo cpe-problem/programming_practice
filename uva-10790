@@ -1,5 +1,5 @@
 //https://onlinejudge.org/external/107/10790.pdf
-
+//兩條線交一點 C(a, 2)
 #include <bits/stdc++.h>
 using namespace std;
 
