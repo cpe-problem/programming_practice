@@ -1,0 +1,29 @@
+//https://onlinejudge.org/external/107/10719.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    string s, s1;
+    bool first = true;
+    while (getline(cin, s)) {
+        getline(cin, s1);
+        int k = stoi(s);   // 正確讀取 k
+        vector<long long> a;
+        stringstream ss(s1);
+        long long x;
+        while (ss >> x) a.push_back(x);
+
+        vector<long long> q;
+        long long b = a[0];       // Horner 開始
+        q.push_back(b);
+
+        for (int i = 1; i < a.size(); i++) {
+            b = a[i] + k * b;
+            if (i < a.size() - 1) q.push_back(b);
+        }
+        long long r = b;
+        cout << "q(x):";
+        for (auto &v : q) cout << " " << v;
+        cout << "\nr = " << r << "\n\n";
+    }
+}
