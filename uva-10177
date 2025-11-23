@@ -1,0 +1,21 @@
+//https://onlinejudge.org/external/101/10177.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    int n;
+    while(cin >> n)
+    {
+        long long S2=0, R2=0, S3=0, R3=0, S4=0, R4=0;
+        long long t = 1LL * n * (n + 1) / 2;
+        S2=(n*(n+1)*(2*n+1))/6;
+        R2=t*t-S2;
+        S3=t*t;
+        R3=t*t*t-S3;
+        S4=1LL * n * (n+1) * (2LL*n+1) * (3LL*n*n + 3LL*n - 1) / 30;
+        R4=t*t*t*t-S4;
+        cout << S2 << " " << R2 << " " << S3 << " " << R3 << " " << S4 << " " << R4 << endl; 
+    }
+}
