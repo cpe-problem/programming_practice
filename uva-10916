@@ -1,0 +1,21 @@
+//https://onlinejudge.org/external/109/10916.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int y;
+    while (cin >> y, y) {
+        int k = (y - 1960) / 10 + 2;
+        double W = pow(2.0, k);  // WARNING: W 可以到 2^30 ≈ 1e9
+        double sum = 0.0;
+        int n = 1;
+        while (true) 
+        {
+            sum += log2(n);
+            if (sum > W) break;
+            n++;
+        }
+        cout << n-1 << endl;
+    }
+}
