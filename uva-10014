@@ -1,0 +1,43 @@
+//https://onlinejudge.org/external/100/10014.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int T;
+    cin >> T;
+    while (T--) {
+
+        int n;
+        cin >> n;
+
+        double a0, an1;
+        cin >> a0 >> an1;
+
+        vector<double> c(n+1);
+        for (int i = 1; i <= n; i++)
+            cin >> c[i];
+
+        // X0 = 0, X1 = 1
+        double X_prev = 0, X = 1, X_next;
+
+        // Y0 = a0, Y1 = 0
+        double Y_prev = a0, Y = 0, Y_next;
+
+        for (int i = 1; i <= n; i++) {
+            X_next = 2*X - X_prev;
+            Y_next = 2*Y - Y_prev + 2*c[i];
+
+            X_prev = X;
+            X = X_next;
+
+            Y_prev = Y;
+            Y = Y_next;
+        }
+
+        // 最後 X = X_{n+1}, Y = Y_{n+1}
+        double a1 = (an1 - Y) / X;
+        cout << fixed << setprecision(2) << a1 << "\n";
+        if (T) cout << "\n";  
+    }
+}
