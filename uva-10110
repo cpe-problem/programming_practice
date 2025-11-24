@@ -1,0 +1,16 @@
+//https://onlinejudge.org/external/101/10110.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    unsigned long long n;         
+    while (cin >> n && n)
+    {
+        unsigned long long q = sqrt((long double)n);
+
+        if (q*q == n) cout << "yes\n";
+        else cout << "no\n";
+    }
+}
