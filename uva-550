@@ -1,0 +1,24 @@
+//https://onlinejudge.org/external/5/550.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int base, d1, A; 
+
+    while (cin >> base >> d1 >> A) {
+        int current = d1;
+        int carry = 0;
+        int length = 0;
+
+        while (true) {
+            int val = current * A + carry;
+            current = val % base; // 算出原數左邊的那一位
+            carry = val / base;   // 算出新的進位
+            length++;
+            // 檢查終止條件：如果位數回到原本的 d1 且 沒有進位了
+            if (current == d1 && carry == 0) break;
+        }
+        cout << length << endl;
+    }
+}
