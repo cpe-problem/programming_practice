@@ -1,0 +1,27 @@
+//https://onlinejudge.org/external/5/568.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int n;
+    while(cin >> n){
+        int res = 1;
+        for(int i=1;i<=n;i++){
+            int x = i;
+            while(x % 2 == 0) x /= 2;   // 去掉 2
+            while(x % 5 == 0) x /= 5;   // 去掉 5
+            res = (res * x) % 100000;   // 保留非零末五位
+        }
+        // 補回被抵消的 2^(#2 - #5)
+        int twos = 0;
+        for(int i=1;i<=n;i++){
+            int x = i;
+            while(x % 2 == 0) twos++, x /= 2;
+            while(x % 5 == 0) twos--, x /= 5;
+        }
+        while(twos--) res = (res * 2) % 100000;
+
+        cout << setw(5) << n << " -> " << (res % 10) << "\n"; //res % 10取最後一位
+    }
+}
