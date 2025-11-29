@@ -1,0 +1,33 @@
+//http://onlinejudge.org/external/4/408.pdf
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int a, b;
+    while(cin >> a >> b)
+    {
+        int seed=0, mod=0;
+        int check[b]={0};
+        memset(check, 0, sizeof(int));
+        bool flag=true;
+        for(;;)
+        {
+            mod=(mod+a)%b;
+            check[mod]=1;
+            if(mod==seed) break;
+        }
+        for(int i=0;i<b;i++)
+        {
+            if(!check[i]) 
+            {
+                flag=false;
+                break;
+            }
+        }
+        cout << setw(10) << a << setw(10) << b;
+        if (flag) cout << "    Good Choice\n\n";
+        else      cout << "    Bad Choice\n\n";
+    }
+}
